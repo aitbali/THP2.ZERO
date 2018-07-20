@@ -17,6 +17,7 @@ Style/FrozenStringLiteralComment:
   Enabled: false
 
 Metrics/BlockLength:
+  Max: 60
   Exclude:
     - 'spec/**/*.rb'
     - 'Guardfile'
