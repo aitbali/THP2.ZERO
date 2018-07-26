@@ -135,6 +135,5 @@ RSpec.describe LessonsController, type: :controller do
         change{ lesson.reload.description }.to(description)
       )
     end
-    
   end
 end
