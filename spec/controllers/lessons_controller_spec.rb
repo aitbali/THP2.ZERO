@@ -8,6 +8,7 @@ RSpec.describe LessonsController, type: :controller do
     subject { get :index }
 
     let!(:lessons){ create_list(:lesson, 5) }
+
     it 'responds with 200' do
       expect(response).to be_ok
     end
@@ -49,6 +50,14 @@ RSpec.describe LessonsController, type: :controller do
   describe "#show" do
     subject { get(:show, params: { id: id }) }
     let(:lesson) { create(:lesson) }
-    let(:id) { lesson.id }
+
+    context "if the id exists" do
+      let(:id) { lesson.id }
+
+      it "returns a 200" do
+        subject
+        expect(response).to be_ok
+      end
+    end
   end
 end

@@ -42,6 +42,7 @@ group :development do
   gem 'annotate'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'sentry-raven'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
@@ -49,6 +50,7 @@ end
 group :test do
   gem 'database_cleaner'
   gem 'shoulda-matchers', '~> 3.1'
+  gem 'simplecov', require: false
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
