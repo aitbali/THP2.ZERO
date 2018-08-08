@@ -6,7 +6,7 @@
 	},
 	"item": [
 		{
-			"_postman_id": "93e2f7a0-5487-4c81-b3bd-61bd80f4d5fa",
+			"_postman_id": "092cb906-cde2-48f0-977b-38b2d037737e",
 			"name": "Get all lesons",
 			"event": [
 				{
@@ -52,7 +52,7 @@
 			"response": []
 		},
 		{
-			"_postman_id": "29dc518f-8704-4a89-a91c-1ace7119e5ad",
+			"_postman_id": "1b0e8c5c-1181-4a61-b80a-e72254cd7e4a",
 			"name": "create lesson",
 			"event": [
 				{
@@ -95,10 +95,65 @@
 			"response": []
 		},
 		{
-			"_postman_id": "d8f697c9-3f80-4ddd-9a05-a4055bab91e5",
+			"_postman_id": "194e90e6-7013-47c7-82db-ccf8502c34e9",
 			"name": "GET last Lesson",
 			"request": {
 				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"lesson\": {\n\t\"title\": \"updated title\"\n\t\"description\" : \"updated description\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/lessons/{{last_lesson_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons",
+						"{{last_lesson_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "c5d240db-461d-476d-8058-572157a71c38",
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n  \"lesson\": {\n    \"title\": \"updated title\",\n    \"description\" : \"updated description\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/lessons/{{last_lesson_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons",
+						"{{last_lesson_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "9f38b93e-12ed-4577-89f8-b7ca98b9e8f1",
+			"name": "DELETE ",
+			"request": {
+				"method": "DELETE",
 				"header": [],
 				"body": {},
 				"url": {
