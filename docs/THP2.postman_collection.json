@@ -1,0 +1,175 @@
+{
+	"info": {
+		"_postman_id": "734961f9-e672-4cde-b9b9-25e481d0dd29",
+		"name": "THP2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"_postman_id": "092cb906-cde2-48f0-977b-38b2d037737e",
+			"name": "Get all lesons",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "faa50231-bcdd-48bd-9c85-9aafa772865c",
+						"type": "text/javascript",
+						"exec": [
+							"const responseData = JSON.parse(responseBody);",
+							"",
+							"if (responseData.success !== false) {",
+							"  console.log(\"[INFOS] lesson id was not set already, using the first one from the retrieved list (as default value for next resquests)\");",
+							" // if(! pm.environment.get(\"last_lesson_id\") && Array.isArray(responseData) && responseData.length > 0) {",
+							"  if( Array.isArray(responseData) && responseData.length > 0) {",
+							"    pm.environment.set(\"last_lesson_id\", responseData[0].id);",
+							"  }",
+							"}"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/lessons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "1b0e8c5c-1181-4a61-b80a-e72254cd7e4a",
+			"name": "create lesson",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e6a798c-a923-4867-a1bb-4bebfc139458",
+						"type": "text/javascript",
+						"exec": [
+							"const responseData = JSON.parse(responseBody);",
+							"",
+							"pm.environment.set(\"last_lesson_id\", responseData.id);"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"lesson\": {\n\t\t\"title\": \"test title\",\n\t\t\"description\": \"test description\"\n\t}\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/lessons",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "194e90e6-7013-47c7-82db-ccf8502c34e9",
+			"name": "GET last Lesson",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"lesson\": {\n\t\"title\": \"updated title\"\n\t\"description\" : \"updated description\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/lessons/{{last_lesson_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons",
+						"{{last_lesson_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "c5d240db-461d-476d-8058-572157a71c38",
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": " {\n  \"lesson\": {\n    \"title\": \"updated title\",\n    \"description\" : \"updated description\"\n  }\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/lessons/{{last_lesson_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons",
+						"{{last_lesson_id}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"_postman_id": "9f38b93e-12ed-4577-89f8-b7ca98b9e8f1",
+			"name": "DELETE ",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:3000/lessons/{{last_lesson_id}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"lessons",
+						"{{last_lesson_id}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
