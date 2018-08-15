@@ -9,7 +9,6 @@
 #  updated_at  :datetime         not null
 #
 
-class Lesson < ApplicationRecord
-  validates :title, presence: true, length: { maximum: 50 }
-  validates :description, length: { maximum: 300 }
+class LessonSerializer < ActiveModel::Serializer
+  attributes :id, :title, :description, :created_at
 end
