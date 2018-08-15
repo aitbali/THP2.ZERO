@@ -11,7 +11,9 @@ Dir["./spec/support/**/*.rb"].sort.each { |f| require f }
 require 'support/json_helper'
 require 'faker'
 require 'shoulda-matchers'
+
 require 'database_cleaner'
+
 require 'simplecov'
 SimpleCov.start
 SimpleCov.minimum_coverage 90
