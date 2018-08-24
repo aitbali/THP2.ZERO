@@ -43,4 +43,8 @@ class User < ApplicationRecord
   include DeviseTokenAuth::Concerns::User
 
   validates :name, presence: true, uniqueness: true
+
+  def as_json(opt = nil)
+    super({ only: %i[id nickname email confirmed_at uid provider] }.merge(opt.to_h))
+  end
 end

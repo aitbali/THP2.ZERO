@@ -5,22 +5,6 @@ require 'support/json_helper'
 
 RSpec.describe LessonsController, type: :controller do
   ##########################################################################
-  describe "#index" do
-    subject { get :index }
-
-    let!(:lessons){ create_list(:lesson, 5) }
-
-    it 'responds with 200' do
-      expect(response).to be_ok
-    end
-
-    it "returns all the lessons" do
-      subject
-      expect(json_response.size).to eq(5)
-      expect(json_response.first[:id]).to be_in(lessons.map(&:id))
-    end
-  end
-  ##########################################################################
   describe "#create" do
     subject { post(:create, params: { lesson: params }) }
     let(:params) do
@@ -105,6 +89,49 @@ RSpec.describe LessonsController, type: :controller do
     end
   end
   ########################################################################
+  describe "#delete" do
+    subject { delete(:destroy, params: { id: id }) }
+    let!(:lesson) { create(:lesson) }
+
+    context "if the id doesn't exist" do
+      let(:id) { Faker::Lorem.word }
+
+      it "returns a 404" do
+        subject
+        expect(response).to be_not_found
+      end
+    end
+
+    context "the id exists" do
+      let(:id) { lesson.id }
+
+      it "returns a 204" do
+        subject
+        expect(response).to be_no_content
+      end
+
+      it "destroys the lesson" do
+        expect{ subject }.to change(Lesson, :count).by(-1)
+      end
+    end
+  end
+  ##########################################################################
+  describe "#index" do
+    subject { get :index }
+
+    let!(:lessons){ create_list(:lesson, 5) }
+
+    it 'responds with 200' do
+      expect(response).to be_ok
+    end
+
+    it "returns all the lessons" do
+      subject
+      expect(json_response.size).to eq(5)
+      expect(json_response.first[:id]).to be_in(lessons.map(&:id))
+    end
+  end
+  ##########################################################################
   describe "#show" do
     subject { get(:show, params: { id: id }) }
     let(:lesson) { create(:lesson) }
@@ -132,33 +159,6 @@ RSpec.describe LessonsController, type: :controller do
       it "returns a 404" do
         subject
         expect(response).to be_not_found
-      end
-    end
-  end
-  ##########################################################################
-  describe "#delete" do
-    subject { delete(:destroy, params: { id: id }) }
-    let!(:lesson) { create(:lesson) }
-
-    context "if the id doesn't exist" do
-      let(:id) { Faker::Lorem.word }
-
-      it "returns a 404" do
-        subject
-        expect(response).to be_not_found
-      end
-    end
-
-    context "the id exists" do
-      let(:id) { lesson.id }
-
-      it "returns a 204" do
-        subject
-        expect(response).to be_no_content
-      end
-
-      it "destroys the lesson" do
-        expect{ subject }.to change(Lesson, :count).by(-1)
       end
     end
   end
