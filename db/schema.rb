@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_151238) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "users", force: :cascade do |t|
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
     t.string "encrypted_password", default: "", null: false
@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(version: 2018_08_16_151238) do
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
     t.string "name"
-    t.string "nickname"
+    t.string "username"
     t.string "image"
     t.string "email"
     t.json "tokens"
