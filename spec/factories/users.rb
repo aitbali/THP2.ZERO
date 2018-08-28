@@ -35,18 +35,22 @@
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
 #
 
-class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  include DeviseTokenAuth::Concerns::User
+FactoryBot.define do
+  factory :user do
+    email { Faker::Internet.email }
+    username { "#{Faker::Name.first_name}##{Random.rand(10_000)}" }
+    password { Faker::Internet.password }
+    provider "email"
+    uid "123"
 
-  validates :username, presence: true, uniqueness: { case_sensitive: false }
+    trait :confirmed do
+      confirmed_at { 2.days.ago }
+    end
 
-  has_many :lessons, foreign_key: 'creator_id', inverse_of: 'creator', dependent: :destroy
-
-  def as_json(opt = nil)
-    super({ only: %i[id username email confirmed_at uid provider] }.merge(opt.to_h))
+    trait :with_lessons do
+      after(:create) do |user|
+        create_list(:lesson, Random.rand(1..4), creator: user)
+      end
+    end
   end
 end
