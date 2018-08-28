@@ -5,6 +5,7 @@ require 'support/json_helper'
 
 RSpec.describe LessonsController, type: :controller do
   ##########################################################################
+
   describe "#create" do
     subject { post(:create, params: { lesson: params }) }
     let(:params) do
@@ -15,6 +16,7 @@ RSpec.describe LessonsController, type: :controller do
     end
     let(:title) { Faker::Lorem.word }
     let(:description) { Faker::DrWho.quote.first(300) }
+
 
     it "fails with a 401" do
       subject
@@ -100,6 +102,7 @@ RSpec.describe LessonsController, type: :controller do
     end
   end
   ########################################################################
+
   describe "#delete" do
     subject { delete(:destroy, params: { id: id }) }
     let!(:lesson) { create(:lesson) }
@@ -135,10 +138,12 @@ RSpec.describe LessonsController, type: :controller do
         it "destroys the lesson" do
           expect{ subject }.to change(Lesson, :count).by(-1)
         end
+
       end
     end
   end
   ##########################################################################
+
   describe "#index" do
     subject { get :index }
 
@@ -205,6 +210,7 @@ RSpec.describe LessonsController, type: :controller do
           subject
           expect(response).to be_not_found
         end
+
       end
     end
   end
@@ -221,6 +227,7 @@ RSpec.describe LessonsController, type: :controller do
     let(:title) { Faker::Lorem.word }
     let(:description) { Faker::StarWars.quote.first(300) }
     let(:id) { lesson.id }
+
 
     it "fails with a 401" do
       subject
@@ -298,6 +305,7 @@ RSpec.describe LessonsController, type: :controller do
           subject
           expect(json_response[:errors].first).to include("Description")
         end
+
       end
     end
   end
