@@ -11,10 +11,8 @@
 #  current_sign_in_ip     :string
 #  email                  :string
 #  encrypted_password     :string           default(""), not null
-#  image                  :string
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
-#  name                   :string
 #  provider               :string           default("email"), not null
 #  remember_created_at    :datetime
 #  reset_password_sent_at :datetime
@@ -33,13 +31,14 @@
 #  index_users_on_email                 (email) UNIQUE
 #  index_users_on_reset_password_token  (reset_password_token) UNIQUE
 #  index_users_on_uid_and_provider      (uid,provider) UNIQUE
+#  index_users_on_username              (username) UNIQUE
 #
 
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :confirmable
   include DeviseTokenAuth::Concerns::User
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
@@ -48,5 +47,9 @@ class User < ApplicationRecord
 
   def as_json(opt = nil)
     super({ only: %i[id username email confirmed_at uid provider] }.merge(opt.to_h))
+  end
+
+  def confirmation_required?
+    false
   end
 end

@@ -3,7 +3,7 @@ describe ApplicationController do
     it "includes nickname and email" do
       subj = ApplicationController.new
       parameters = double("devise params")
-      expect(parameters).to receive(:permit).with(:sign_up, keys: %i[nickname email])
+      expect(parameters).to receive(:permit).with(:sign_up, keys: %i[username email])
       expect(subj).to receive(:devise_parameter_sanitizer).and_return(parameters)
       subj.send(:configure_permitted_parameters)
     end
