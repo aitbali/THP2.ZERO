@@ -4,7 +4,6 @@ require 'rails_helper'
 require 'support/json_helper'
 
 RSpec.describe LessonsController, type: :controller do
-  ##########################################################################
   describe "#create" do
     subject { post(:create, params: { lesson: params }) }
     let(:params) do
@@ -15,7 +14,7 @@ RSpec.describe LessonsController, type: :controller do
     end
     let(:title) { Faker::Lorem.word }
     let(:description) { Faker::DrWho.quote.first(300) }
-
+    
     it "fails with a 401" do
       subject
       expect(response).to be_unauthorized
