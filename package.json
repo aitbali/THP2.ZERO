@@ -1,7 +1,9 @@
 {
   "scripts": {
     "precommit": "rubocop && annotate",
-    "prepush": "rubocop && COVERAGE=true rspec --format doc"
+
+    "prepush": "rubocop && COVERAGE=true rspec --format progress"
+
   },
   "dependencies": {
     "husky": "^0.14.3"
