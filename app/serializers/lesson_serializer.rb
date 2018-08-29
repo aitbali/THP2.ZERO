@@ -7,7 +7,6 @@
 #  title       :string(50)       not null
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
-
 #  creator_id  :uuid
 #
 # Indexes
@@ -21,5 +20,4 @@
 
 class LessonSerializer < ActiveModel::Serializer
   attributes :id, :title, :description, :created_at, :creator_id
-
 end

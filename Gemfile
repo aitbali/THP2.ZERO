@@ -37,15 +37,14 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'factory_bot_rails'
-  gem 'database_cleaner'
   gem 'rspec-rails', '~> 3.7'
 end
 
 group :development do
   gem 'annotate'
-  gem 'guard', require: false
-  gem 'guard-annotate', require: false
-
+  gem 'database_cleaner'
+  gem 'guard'
+  gem 'guard-annotate'
   gem 'guard-rspec', require: false
   gem 'guard-rubocop', require: false
 
@@ -58,11 +57,7 @@ group :development do
 end
 
 group :test do
-
   gem 'faker'
-
-  gem 'database_cleaner'
-
   gem 'shoulda-matchers', '~> 3.1'
   gem 'simplecov', require: false
 end
