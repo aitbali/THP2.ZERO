@@ -104,6 +104,7 @@ RSpec.describe LessonsController, type: :controller do
     subject { delete(:destroy, params: { id: id }) }
     let!(:lesson) { create(:lesson) }
     let(:id) { lesson.id }
+    let(:creator) { test_user }
 
     it "fails with a 401" do
       subject
