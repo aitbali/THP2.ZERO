@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-
   include Pundit
   include DeviseTokenAuth::Concerns::SetUserByToken
 
@@ -22,11 +21,9 @@ class ApplicationController < ActionController::API
     render json: { errors: exception.record.errors.full_messages }, status: :forbidden
   end
 
-
   def render_unauthorized
     head :unauthorized
   end
-
 
   protected
 

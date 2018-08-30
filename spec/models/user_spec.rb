@@ -34,7 +34,6 @@
 #  index_users_on_username              (username) UNIQUE
 #
 
-
 describe User do
   subject do
     create(:user, :confirmed)
@@ -79,4 +78,3 @@ describe User do
   it { is_expected.to validate_presence_of(:username) }
   it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
 end
-
