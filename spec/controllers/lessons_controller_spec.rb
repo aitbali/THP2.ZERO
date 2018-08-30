@@ -40,6 +40,7 @@ RSpec.describe LessonsController, type: :controller do
         expect{ subject }.to change(Lesson, :count).by(1)
       end
 
+
       it "sets the creator to current_user" do
         subject
         expect(json_response[:creator_id]).to eq(test_user.id)
@@ -111,6 +112,7 @@ RSpec.describe LessonsController, type: :controller do
     let(:id) { lesson.id }
     let(:creator) { test_user }
 
+
     it "fails with a 401" do
       subject
       expect(response).to be_unauthorized
@@ -131,6 +133,7 @@ RSpec.describe LessonsController, type: :controller do
       end
 
       context "the id exists" do
+
         context "the user is not the creator" do
           let(:creator) { create(:user) }
 
@@ -210,6 +213,7 @@ RSpec.describe LessonsController, type: :controller do
           expect(json_response[:description]).to eq(lesson.description)
           expect(json_response["created_at"]).to eq(lesson.created_at.as_json)
           expect(json_response["creator_id"]).to eq(lesson.creator_id)
+
         end
       end
 
@@ -232,11 +236,13 @@ RSpec.describe LessonsController, type: :controller do
         description: description
       }
     end
+
     let!(:lesson) { create(:lesson, creator: creator) }
     let(:title) { Faker::Lorem.word }
     let(:description) { Faker::StarWars.quote.first(300) }
     let(:id) { lesson.id }
     let(:creator) { test_user }
+
 
     it "fails with a 401" do
       subject

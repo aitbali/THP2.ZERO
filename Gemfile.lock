@@ -263,7 +263,9 @@ DEPENDENCIES
   annotate
   bootsnap (>= 1.1.0)
   byebug
+
   database_cleaner
+
   devise_token_auth (~> 0.1)!
   factory_bot_rails
   faker
