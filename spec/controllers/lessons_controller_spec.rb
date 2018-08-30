@@ -40,6 +40,11 @@ RSpec.describe LessonsController, type: :controller do
         expect{ subject }.to change(Lesson, :count).by(1)
       end
 
+      it "sets the creator to current_user" do
+        subject
+        expect(json_response[:creator_id]).to eq(test_user.id)
+      end
+
       context "lesson is missing from params" do
         subject { post(:create) }
 
@@ -204,6 +209,7 @@ RSpec.describe LessonsController, type: :controller do
           expect(json_response[:title]).to eq(lesson.title)
           expect(json_response[:description]).to eq(lesson.description)
           expect(json_response["created_at"]).to eq(lesson.created_at.as_json)
+          expect(json_response["creator_id"]).to eq(lesson.creator_id)
         end
       end
 
