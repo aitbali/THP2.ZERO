@@ -1,7 +1,6 @@
 {
   "scripts": {
     "precommit": "rubocop && annotate",
-
     "prepush": "rubocop && COVERAGE=true rspec --format progress"
   },
   "dependencies": {

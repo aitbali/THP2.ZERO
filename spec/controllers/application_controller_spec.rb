@@ -1,6 +1,6 @@
 describe ApplicationController do
   describe "devise permitted params" do
-    it "includes nickname and email" do
+    it "includes username and email" do
       subj = ApplicationController.new
       parameters = double("devise params")
       expect(parameters).to receive(:permit).with(:sign_up, keys: %i[username email])
